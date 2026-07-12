@@ -14,8 +14,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         configureAppearance()
 
         let localPathConfigURL = Bundle.main.url(forResource: "path-configuration", withExtension: "json")!
-//        let remotePathConfigURL = URL(string: "https://grind.fdo.cr/configurations/ios_v1.json")!
-        let remotePathConfigURL = URL(string: "https://fernandos-macbook-air.tail5b20ea.ts.net/configurations/ios_v1.json")!
+        let remotePathConfigURL = URL(string: "https://grind.fdo.cr/configurations/ios_v1.json")!
+//        let remotePathConfigURL = URL(string: "https://fernandos-macbook-air.tail5b20ea.ts.net/configurations/ios_v1.json")!
 
         Hotwire.registerBridgeComponents([
             GeolocationComponent.self,
