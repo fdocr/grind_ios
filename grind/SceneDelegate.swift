@@ -6,8 +6,8 @@
 import HotwireNative
 import UIKit
 
-let rootURL = URL(string: "https://grind.fdo.cr")!
-//let rootURL = URL(string: "https://fernandos-macbook-air.tail5b20ea.ts.net")!
+//let rootURL = URL(string: "https://grind.fdo.cr")!
+let rootURL = URL(string: "https://fernandos-macbook-air.tail5b20ea.ts.net")!
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     var window: UIWindow?
@@ -15,6 +15,13 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     private var navigator = Navigator(configuration: Navigator.Configuration(name: "main", startLocation: rootURL))
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
+        guard let windowScene = scene as? UIWindowScene else { return }
+
+        let window = UIWindow(windowScene: windowScene)
+        window.backgroundColor = .white
+        window.tintColor = UIColor(red: 39 / 255, green: 111 / 255, blue: 84 / 255, alpha: 1)
+        self.window = window
+
         // Get URL components from the incoming user activity.
         guard let userActivity = connectionOptions.userActivities.first,
             userActivity.activityType == NSUserActivityTypeBrowsingWeb,
@@ -22,12 +29,14 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             let currentURL = navigator.activeWebView.url,
               incomingURL.lastPathComponent != currentURL.lastPathComponent else {
 
-            window?.rootViewController = navigator.rootViewController
+            window.rootViewController = navigator.rootViewController
+            window.makeKeyAndVisible()
             navigator.start()
             return
         }
 
-        window?.rootViewController = navigator.rootViewController
+        window.rootViewController = navigator.rootViewController
+        window.makeKeyAndVisible()
         navigator.start()
         guard incomingURL.lastPathComponent != "/" else { return }
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [self] in
