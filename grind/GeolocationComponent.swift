@@ -54,6 +54,12 @@ final class GeolocationComponent: BridgeComponent {
         }
     }
 
+    /// Modal sessions can keep the web view alive after dismiss; stop CoreLocation
+    /// when the destination leaves the hierarchy so GPS does not keep streaming.
+    override func onViewDidDisappear() {
+        provider.stop()
+    }
+
     private func handleStart() {
         switch provider.authorizationStatus {
         case .denied, .restricted:

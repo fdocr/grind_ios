@@ -31,7 +31,7 @@ final class MenuComponent: BridgeComponent {
     }
 
     private func addMenuButton(with message: Message) {
-        guard let viewController else { return }
+        guard let viewController, !isPresentedModally(viewController) else { return }
 
         let data: MessageData? = message.data()
         let title = data?.title ?? "Menu"
@@ -45,6 +45,11 @@ final class MenuComponent: BridgeComponent {
         )
         item.accessibilityLabel = title
         viewController.navigationItem.rightBarButtonItem = item
+    }
+
+    private func isPresentedModally(_ viewController: UIViewController) -> Bool {
+        viewController.presentingViewController != nil
+            || viewController.navigationController?.presentingViewController != nil
     }
 
     private struct MessageData: Decodable {
