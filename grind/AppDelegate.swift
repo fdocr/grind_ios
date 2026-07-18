@@ -14,8 +14,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         configureAppearance()
 
         let localPathConfigURL = Bundle.main.url(forResource: "path-configuration", withExtension: "json")!
-        let remotePathConfigURL = URL(string: "https://grind.fdo.cr/configurations/ios_v1.json")!
-//        let remotePathConfigURL = URL(string: "https://fernandos-macbook-air.tail5b20ea.ts.net/configurations/ios_v1.json")!
+//        let remotePathConfigURL = URL(string: "https://grind.fdo.cr/configurations/ios_v1.json")!
+        let remotePathConfigURL = URL(string: "https://fernandos-macbook-air.tail5b20ea.ts.net/configurations/ios_v1.json")!
 
         Hotwire.registerBridgeComponents([
             GeolocationComponent.self,
@@ -80,6 +80,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     /// Avoid the black blink while pages load (Hotwire defaults to `.systemBackground`,
     /// which is black in dark mode before the light web UI paints).
     private func configureHotwireAppearance() {
+        // Modals dismiss via swipe-down; no Done/Close bar button.
+        Hotwire.config.showDoneButtonOnModals = false
+
         Hotwire.config.defaultViewController = { url in
             GrindWebViewController(url: url)
         }
