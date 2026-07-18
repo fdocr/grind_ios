@@ -6,8 +6,8 @@
 import HotwireNative
 import UIKit
 
-//let rootURL = URL(string: "https://grind.fdo.cr")!
-let rootURL = URL(string: "https://fernandos-macbook-air.tail5b20ea.ts.net")!
+let rootURL = URL(string: "https://grind.fdo.cr")!
+//let rootURL = URL(string: "https://fernandos-macbook-air.tail5b20ea.ts.net")!
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     var window: UIWindow?
